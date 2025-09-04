@@ -1,0 +1,7 @@
+id,name,salary,department
+111,Aditi,577866.0,Production
+222,Amey,500000.0,Research
+333,Kavya,600000.0,Admin
+444,Aarti,300000.0,Development
+555,Amit,200000.0,Tester
+777,Radha,577866.0,Production
