@@ -5,12 +5,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
-
 public class EmployeeController {
     public List<EmployeeData> employeesFromPost = new ArrayList<EmployeeData>();
 
@@ -50,7 +48,7 @@ public class EmployeeController {
     //************************Select Insert database ******************
 
     @Autowired
-    private InsertEmployeeDb insertEmployeeDb;
+    private InsertEmployeeDb objinsertEmployeeDb;
     @Autowired
     public SelectEmployeeDb objSelectEmployee;
 
@@ -61,13 +59,37 @@ public class EmployeeController {
     }
 
     @PostMapping("/insert")
-    public String insertEmployees(@RequestBody EmployeeData EmployeeData) throws IOException {
-        List<EmployeeData> employeesTo = new ArrayList<>();
-        employeesTo.add(EmployeeData);
-        return employeesTo.toString();
+    public void insertEmployees(@RequestBody EmployeeData employees) {
+        System.out.println("employees = " + employees);
+        if (employees == null) {
+            throw new RuntimeException("Employee mandatory");
+        }
+
+        objinsertEmployeeDb.insertEmployees(employees);
+
     }
 
+    //************************Select Insert database ******************
+
+
+@Autowired
+EmployeeRepository  objEmployeeRepository;
+
+   @GetMapping("/jpaemployee")
+public List<Employees> getAllEmployeesJPA()  {
+    System.out.println("Fetching all getAllEmployeesJPA...");
+//    List<Employees>EmployeeList=
+    return  objEmployeeRepository.findAll();
+
 }
+@PostMapping("/addjpa")
+    public void addEmployeesJPA(@RequestBody Employees employee) {
+       System.out.println("employees = " + employee);
+   objEmployeeRepository.save(employee);
+}
+}
+
+
 
 
 

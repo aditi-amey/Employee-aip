@@ -8,7 +8,9 @@ CREATE TABLE Employees (
     employeeDept VARCHAR(50) NOT NULL
 );
 desc employees;
-INSERT INTO Employees (employeeName, employeeSalary, employeeDept) 
+
+
+insert INTO Employee (employeeName, employeeSalary, employeeDept) 
 VALUES
 ('Amit', 50000.00, 'HR'),
 ('Priya', 65000.00, 'Finance'),
@@ -16,7 +18,10 @@ VALUES
 ('Sneha', 70000.00, 'Marketing'),
 ('Vikas', 60000.00, 'Sales');
 
-select*from employees;
+commit;
+
+select * from Employee;
+
 desc employees;
 
 

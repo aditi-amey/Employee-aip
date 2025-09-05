@@ -9,32 +9,31 @@ import java.util.ArrayList;
 import java.util.List;
 @Component
 public class InsertEmployeeDb {
-      String url = "jdbc:mysql://localhost:3306/aditi";
-      String user = "root";
-      String password = "root";
+     String url = "jdbc:mysql://localhost:3306/aditi";
+    String user = "root";
+     String password = "root";
+
+    public void insertEmployees(EmployeeData employeesData) {
+        String insertSQL = "INSERT INTO Employee (id, employeeName, employeeSalary, employeeDept) VALUES (?, ?, ?, ?)";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement(insertSQL);
+
+//            for (EmployeeData emp : employeesData) {
+                ps.setInt(1, employeesData.getId());
+                ps.setString(2, employeesData.getEmployeeName());
+                ps.setDouble(3, employeesData.getEmployeeSalary());
+                ps.setString(4, employeesData.getEmployeeDept());
+                ps.executeUpdate();
 
 
-        public String insertEmployees(List<EmployeeData> employees) {
-            String insertSQL = "INSERT INTO employee (id, employeeName, employeeSalary, employeeDept) VALUES (?, ?, ?, ?)";
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection(url, user, password);
-                PreparedStatement ps = con.prepareStatement(insertSQL);
-
-                for (EmployeeData emp : employees) {
-                    ps.setInt(1, emp.getId());
-                    ps.setString(2, emp.getEmployeeName());
-                    ps.setDouble(3, emp.getEmployeeSalary());
-                    ps.setString(4, emp.getEmployeeDept());
-                    ps.executeUpdate();
-                }
-
-                ps.close();
-                con.close();
-                return "Employees inserted successfully!";
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "Error inserting employees: " + e.getMessage();
-            }
+            ps.close();
+            con.close();
+            System.out.println("Employees inserted successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println( "Error inserting employees: " + e.getMessage());
         }
     }
+}
