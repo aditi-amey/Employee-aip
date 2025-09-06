@@ -25,9 +25,6 @@ public class Employees {
         this.employeeDept = employeeDept;
     }
 
-    public Employees() {
-
-    }
 
 
     public int getId() {
