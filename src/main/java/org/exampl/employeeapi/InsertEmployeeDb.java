@@ -5,8 +5,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.List;
+
 @Component
 public class InsertEmployeeDb {
      String url = "jdbc:mysql://localhost:3306/aditi";
