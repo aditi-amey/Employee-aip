@@ -1,14 +1,16 @@
 package org.exampl.employeeapi;
 
 
-
-public class EmployeeData {
+public class
+EmployeeData {
     private int id;
     private String employeeName;
     private double employeeSalary;
     private String employeeDept;
-    
 
+
+//    @ManyToOne
+//    private EmployeeProject project;
     public EmployeeData(int id, String employeeName, double employeeSalary, String employeeDept) {
         this.id = id;
         this.employeeName = employeeName;

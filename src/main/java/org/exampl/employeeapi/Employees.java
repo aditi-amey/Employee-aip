@@ -1,12 +1,9 @@
 package org.exampl.employeeapi;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="employee")
+@Table(name="employees")
 public class Employees {
     @Id
     @Column(name="id")
@@ -18,11 +15,19 @@ public class Employees {
     @Column
     private String employeeDept;
 
+    @Column(name = "project_id")
+    private int projectId;
+    @ManyToOne
+    @JoinColumn(name="project_id")
+   private Project project;
+
+
     public Employees(int id, String employeeName, double employeeSalary, String employeeDept) {
         this.id = id;
         this.employeeName = employeeName;
         this.employeeSalary = employeeSalary;
         this.employeeDept = employeeDept;
+
     }
 
     public Employees() {
@@ -61,5 +66,7 @@ public class Employees {
     public void setEmployeeDept(String employeeDept) {
         this.employeeDept = employeeDept;
     }
+
+
 }
 

@@ -9,12 +9,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
+
 public class EmployeeController {
     public List<EmployeeData> employeesFromPost = new ArrayList<EmployeeData>();
 
     //************************read write file ******************************
+
     @Autowired
     public EmployeeService objEmployeeService;
+//    @Autowired
+//    private EmployeeRepository.InsertEmployeeDb objinsertEmployeeDb;
+    @Autowired
+    public SelectEmployeeDb objSelectEmployee;
+    @Autowired
+    EmployeeRepository objEmployeeRepository;
+//    @Autowired
+//    ProjectRepository objProjectRepo;
 
     @GetMapping("/buildEmployeeList")
     public List<EmployeeData> getAllEmployees() throws IOException {
@@ -47,10 +57,7 @@ public class EmployeeController {
 
     //************************Select Insert database ******************
 
-    @Autowired
-    private InsertEmployeeDb objinsertEmployeeDb;
-    @Autowired
-    public SelectEmployeeDb objSelectEmployee;
+
 
     @GetMapping("/selectemployee")
     public List<EmployeeData> getAllSelectEmployee() throws IOException {
@@ -58,22 +65,21 @@ public class EmployeeController {
         return objSelectEmployee.getAllSelectEmployee();  // 👈 directly return DB list
     }
 
-    @PostMapping("/insert")
-    public void insertEmployees(@RequestBody EmployeeData employees) {
-        System.out.println("employees = " + employees);
-        if (employees == null) {
-            throw new RuntimeException("Employee mandatory");
-        }
-
-        objinsertEmployeeDb.insertEmployees(employees);
-
-    }
+//    @PostMapping("/insert")
+//    public void insertEmployees(@RequestBody EmployeeData employees) {
+//        System.out.println("employees = " + employees);
+//        if (employees == null) {
+//            throw new RuntimeException("Employee mandatory");
+//        }
+//
+//        objinsertEmployeeDb.insertEmployees(employees);
+//
+//    }
 
     //************************Select Insert database ******************
 
 
-@Autowired
-EmployeeRepository  objEmployeeRepository;
+
 
    @GetMapping("/jpaemployee")
 public List<Employees> getAllEmployeesJPA()  {
@@ -83,12 +89,37 @@ public List<Employees> getAllEmployeesJPA()  {
 
 }
 @PostMapping("/addjpa")
-    public void addEmployeesJPA(@RequestBody Employees employee) {
-       System.out.println("employees = " + employee);
-   objEmployeeRepository.save(employee);
-}
+    public void addEmployeesJPA(@RequestBody Employees employees) {
+       System.out.println("employees = " + employees);
+   objEmployeeRepository.save(employees);
 }
 
+    @GetMapping("/employee/{name}")
+    public List<Employees> getAllEmployeesByName(@PathVariable String name)  {
+        System.out.println("Fetching all getAllEmployeesJPA...");
+        return  objEmployeeRepository.findByEmployeeName(name);
+    }
+    @GetMapping("/employee1/{name}")
+    public List<EmployeeProject> getAllProjectEmployeesName(@PathVariable String name)  {
+        return  objEmployeeRepository.findProjectByEmployeeName(name);
+    }
+    @GetMapping("/project/{projectName}")
+    public List<EmployeeProject> getAllProjectName(@PathVariable String projectName)  {
+        return  objEmployeeRepository.findProjectByProjectName(projectName);
+    }
+@GetMapping("/desc")
+    List<EmployeeProject>getAllEmployeeSalary(){
+        return objEmployeeRepository.findSalaryInDESC();
+}
+@GetMapping("/grt/{salary}")
+    List<EmployeeProject>getAllGreater(@PathVariable double salary){
+        return objEmployeeRepository.findEmployeeGrt(salary);
+}
+    @GetMapping("/max")
+    List<EmployeeProject>getAllDepartmentWiseSalary(){
+        return objEmployeeRepository.findDeptWiseSalary();
+}
+}
 
 
 

@@ -11,3 +11,5 @@ id,name,salary,department
 102,Mira,577866.0,Production
 103,Mira,577866.0,Production
 104,Gaurav,577866.0,Production
+201,test1,6000.0,IT
+7,RAM,600760.0,IT
