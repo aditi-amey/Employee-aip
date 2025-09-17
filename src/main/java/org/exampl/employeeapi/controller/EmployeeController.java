@@ -1,5 +1,11 @@
-package org.exampl.employeeapi;
+package org.exampl.employeeapi.controller;
 
+import org.exampl.employeeapi.*;
+import org.exampl.employeeapi.database.SelectEmployeeDb;
+import org.exampl.employeeapi.entities.EmployeeData;
+import org.exampl.employeeapi.entities.Employees;
+import org.exampl.employeeapi.repository.EmployeeRepository;
+import org.exampl.employeeapi.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +23,7 @@ public class EmployeeController {
 
     @Autowired
     public EmployeeService objEmployeeService;
-//    @Autowired
+    //    @Autowired
 //    private EmployeeRepository.InsertEmployeeDb objinsertEmployeeDb;
     @Autowired
     public SelectEmployeeDb objSelectEmployee;
@@ -58,7 +64,6 @@ public class EmployeeController {
     //************************Select Insert database ******************
 
 
-
     @GetMapping("/selectemployee")
     public List<EmployeeData> getAllSelectEmployee() throws IOException {
         System.out.println("Fetching all employees from DB...");
@@ -79,47 +84,69 @@ public class EmployeeController {
     //************************Select Insert database ******************
 
 
-
-
-   @GetMapping("/jpaemployee")
-public List<Employees> getAllEmployeesJPA()  {
-    System.out.println("Fetching all getAllEmployeesJPA...");
+    @GetMapping("/jpaemployee")
+    public List<Employees> getAllEmployeesJPA() {
+        System.out.println("Fetching all getAllEmployeesJPA...");
 //    List<Employees>EmployeeList=
-    return  objEmployeeRepository.findAll();
+        return objEmployeeRepository.findAll();
 
-}
-@PostMapping("/addjpa")
+    }
+
+    @PostMapping("/addjpa")
     public void addEmployeesJPA(@RequestBody Employees employees) {
-       System.out.println("employees = " + employees);
-   objEmployeeRepository.save(employees);
-}
+        System.out.println("employees = " + employees);
+        objEmployeeRepository.save(employees);
+    }
 
     @GetMapping("/employee/{name}")
-    public List<Employees> getAllEmployeesByName(@PathVariable String name)  {
+    public List<Employees> getAllEmployeesByName(@PathVariable String name) {
         System.out.println("Fetching all getAllEmployeesJPA...");
-        return  objEmployeeRepository.findByEmployeeName(name);
+        return objEmployeeRepository.findByEmployeeName(name);
     }
+
     @GetMapping("/employee1/{name}")
-    public List<EmployeeProject> getAllProjectEmployeesName(@PathVariable String name)  {
-        return  objEmployeeRepository.findProjectByEmployeeName(name);
+    public List<EmployeeProject> getAllProjectEmployeesName(@PathVariable String name) {
+        return objEmployeeRepository.findProjectByEmployeeName(name);
     }
+
     @GetMapping("/project/{projectName}")
-    public List<EmployeeProject> getAllProjectName(@PathVariable String projectName)  {
-        return  objEmployeeRepository.findProjectByProjectName(projectName);
+    public List<EmployeeProject> getAllProjectName(@PathVariable String projectName) {
+        return objEmployeeRepository.findProjectByProjectName(projectName);
     }
-@GetMapping("/desc")
-    List<EmployeeProject>getAllEmployeeSalary(){
+
+    @GetMapping("/desc")
+    List<EmployeeProject> getAllEmployeeSalary() {
+
         return objEmployeeRepository.findSalaryInDESC();
-}
-@GetMapping("/grt/{salary}")
-    List<EmployeeProject>getAllGreater(@PathVariable double salary){
+    }
+
+    @GetMapping("/grt/{salary}")
+    List<EmployeeProject> getAllGreater(@PathVariable double salary) {
         return objEmployeeRepository.findEmployeeGrt(salary);
-}
+    }
+
     @GetMapping("/max")
-    List<EmployeeProject>getAllDepartmentWiseSalary(){
+    List<EmployeeProject> getAllDepartmentWiseSalary() {
+
         return objEmployeeRepository.findDeptWiseSalary();
+    }
+
+    @GetMapping("/employeesId/{projectId}")
+    public List<Employees> getAllEmployeeId(@PathVariable long projectId){
+        return objEmployeeRepository.findByProjectId(projectId);
+    }
+    @GetMapping("/employees/{projectName}")
+    public List<Employees> getAllProjectByName(@PathVariable String projectName) {
+        return objEmployeeRepository.findByProject_projectName(projectName);
+    }
+    @GetMapping("/DESC1")
+    public List<Employees> getAllEmployeeSalaryDESC() {
+        return objEmployeeRepository.findAllByOrderByEmployeeSalaryDesc();
+    }
+
+
 }
-}
+
 
 
 

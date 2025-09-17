@@ -1,4 +1,4 @@
-package org.exampl.employeeapi;
+package org.exampl.employeeapi.entities;
 
 
 public class

@@ -1,4 +1,4 @@
-package org.exampl.employeeapi;
+package org.exampl.employeeapi.entities;
 
 import jakarta.persistence.*;
 
@@ -15,8 +15,9 @@ public class Employees {
     @Column
     private String employeeDept;
 
-    @Column(name = "project_id")
+    @Column(name = "project_id",insertable = false,updatable = false)
     private int projectId;
+
     @ManyToOne
     @JoinColumn(name="project_id")
    private Project project;
@@ -29,11 +30,17 @@ public class Employees {
         this.employeeDept = employeeDept;
 
     }
-
     public Employees() {
 
     }
 
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 
     public int getId() {
         return id;

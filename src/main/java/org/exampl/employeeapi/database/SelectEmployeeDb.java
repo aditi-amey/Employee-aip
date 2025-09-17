@@ -1,5 +1,6 @@
-package org.exampl.employeeapi;
+package org.exampl.employeeapi.database;
 
+import org.exampl.employeeapi.entities.EmployeeData;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;

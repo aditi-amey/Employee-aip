@@ -1,26 +1,27 @@
-package org.exampl.employeeapi;
+package org.exampl.employeeapi.repository;
 
+import org.exampl.employeeapi.EmployeeProject;
+import org.exampl.employeeapi.entities.Employees;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employees, Integer> {
    List<Employees> findByEmployeeName(String name);
-//    @Query(value = "select employeeName,projectname" +
-//            " from employees e" +
-//            " join project p" +
-//            "  on e.project_id=p.projectid" +
-//            " where employeeName=:Name",nativeQuery = true)
-//    List<EmployeeProject>findProjectByEmployeeName(@Param("Name")String employeeName);
-List<Employees> findByProjectId(long projectid);
+
+    List<Employees> findByProjectId(long projectId);
+
+    List<Employees> findByProject_projectName(String projectName);
+
+    List<Employees> findAllByOrderByEmployeeSalaryDesc();
+
+//    List<Employees>find(@Param("salary")double salary);
+
+
     @Query(value = "SELECT p.projectname AS projectName, e.employeeName AS employeesName " +
             "FROM employees e " +
             "JOIN project p " +

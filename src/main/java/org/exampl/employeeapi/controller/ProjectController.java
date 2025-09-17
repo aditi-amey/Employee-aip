@@ -1,4 +1,7 @@
-package org.exampl.employeeapi;
+package org.exampl.employeeapi.controller;
+import org.exampl.employeeapi.entities.Project;
+import org.exampl.employeeapi.ProjectEmployee;
+import org.exampl.employeeapi.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +14,7 @@ import java.util.List;
 @RequestMapping("/api/project")
 public class ProjectController {
    @Autowired
-    ProjectRepository objProjectRepo;
-
-
-
+   ProjectRepository objProjectRepo;
 
     @GetMapping("/projectCount")
     public List<ProjectEmployee> getAllProjectCount()  {
@@ -33,12 +33,22 @@ public class ProjectController {
     public  List<ProjectEmployee>getProjectStatus(@PathVariable String projectStatus){
         return objProjectRepo.findProjectStatus(projectStatus);
     }
-    @GetMapping("/date/{projectStartDate}")
-    public  List<ProjectEmployee>getProjectDate(@PathVariable String projectStartDate) throws ParseException {
+//    @GetMapping("/date/{projectStartDate}")
+//    public  List<ProjectEmployee>getProjectDate(@PathVariable String projectStartDate) throws ParseException {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date parsedDate = sdf.parse(projectStartDate);
+//        return objProjectRepo.findProjectStart(parsedDate);
+//    }
+    @GetMapping("/date/{Date}")
+    public  List<ProjectEmployee>getProjectDate(@PathVariable String Date) {
+               return objProjectRepo.findProjectStart(Date);
+    }
+    @GetMapping("/before/{projectstartdate}")
+    public List<Project> getAllEmployeeSalaryDESC(@PathVariable String projectstartdate) throws ParseException  {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsedDate = sdf.parse(projectStartDate);
-        return objProjectRepo.findProjectStart(parsedDate);
+        Date parsedDate = sdf.parse(projectstartdate);
+            return objProjectRepo.findByProjectStartDate(parsedDate);
+        }
     }
 
-}
 

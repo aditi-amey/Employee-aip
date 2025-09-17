@@ -1,6 +1,8 @@
-package org.exampl.employeeapi;
+package org.exampl.employeeapi.repository;
 
 //import org.exampl.employeeapi.ProjectEmployee;
+import org.exampl.employeeapi.ProjectEmployee;
+import org.exampl.employeeapi.entities.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -34,7 +36,12 @@ List<ProjectEmployee> findProjectEmployeeByCounts();
             " p.projectStartDate as projectStartDate "+
                     "FROM employees e "+
                     "JOIN project p ON e.project_id = p.projectid "+
-                     "WHERE p.projectStartDate < :projectStartDate",nativeQuery = true)
-    List<ProjectEmployee>findProjectStart(@Param("projectStartDate")Date projectStartDate);
+                     "WHERE p.projectStartDate < :Date",nativeQuery = true)
+    List<ProjectEmployee>findProjectStart(@Param("Date") String Date);
 
+   List<Project>findByProjectStartDate(Date projectstartdate);
+//    List<Project>findByProjectStartDateBefore(Date projectstartdate);
+//    List<Project>findByProjectStartDateAfter(Date projectstartdate);
+
+//        List<Project> findByProjectstatus(String projectstatus);
 }
