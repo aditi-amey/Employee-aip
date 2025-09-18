@@ -32,10 +32,10 @@ public class EmployeeProjectDtoController {
         List<EmployeeDto> employees = employeeDtoServies.getEmployeesByProjectName(name);
         return ResponseEntity.ok(employees);
     }
-    @GetMapping("/desc")
-    public ResponseEntity<List<EmployeeDto>> getEmployeesByName() {
-        List<EmployeeDto> employees = employeeDtoServies.getEmployeesByProject();
-        return ResponseEntity.ok(employees);
-    }
+//    @GetMapping("/desc")
+//    public ResponseEntity<List<EmployeeDto>> getEmployeesByName() {
+//        List<EmployeeDto> employees = employeeDtoServies.getEmployeesByProject();
+//        return ResponseEntity.ok(employees);
+//    }
 
 }
