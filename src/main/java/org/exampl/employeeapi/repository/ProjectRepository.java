@@ -43,5 +43,5 @@ List<ProjectEmployee> findProjectEmployeeByCounts();
 //    List<Project>findByProjectStartDateBefore(Date projectstartdate);
 //    List<Project>findByProjectStartDateAfter(Date projectstartdate);
 
-//        List<Project> findByProjectstatus(String projectstatus);
+
 }

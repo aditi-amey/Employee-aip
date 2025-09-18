@@ -22,10 +22,10 @@ public class Project {
 
     }
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project",fetch = FetchType.EAGER)
     List<Employees> employeesList = new ArrayList<>();
 
-     @OneToMany(mappedBy = "project")
+     @OneToMany(mappedBy = "project",fetch = FetchType.EAGER)
      List<Expenses>expensesList=new ArrayList<>();
 //    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL)
 //    private Expenses expenses;

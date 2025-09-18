@@ -18,13 +18,14 @@ public class ExpenseController {
     @Autowired
     ExpensesRepository objExpensesRepo;
 
-//    @GetMapping("/expenses/{projectid}")
-//    public List<Expenses> getAllProjectByExpensesId(@PathVariable int projectid) {
-//        return objExpensesRepo.findByProject_Projectid(projectid);
-//
-//    }
+    @GetMapping("/expenses/{projectid}")
+    public List<Expenses> getAllProjectByExpensesId(@PathVariable int projectid) {
+        return objExpensesRepo.findByProject_Projectid(projectid);
+
+    }
     @GetMapping("/project/{projectName}")
     public List<Expenses>getAllProjectByExpensesName(@PathVariable String projectName) {
         return objExpensesRepo.findByProject_ProjectName(projectName);
 }
+
     }
